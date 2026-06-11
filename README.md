@@ -101,7 +101,24 @@ Inside a session you can also just ask: *"show me my project memory index"* or
 
 ---
 
-## 3. The file format
+## 3. `CLAUDE.md` vs memory — don't mix them up
+
+This is the #1 point of confusion, so be clear on it:
+
+| | `CLAUDE.md` | memory (`MEMORY.md` + `*.md`) |
+|---|---|---|
+| Who writes it | **You** | **Claude** (you trigger it) |
+| What it is | Your standing **instructions** | Claude's **notebook** of learned facts |
+| When loaded | **Always**, every session | **Recalled by relevance** (index always loaded) |
+| Example | "Don't pad responses with affirmation" | "The Figma token lives in `.env.local`" |
+
+Rule of thumb: a *rule you want Claude to always follow* → `CLAUDE.md`. A *fact
+Claude discovered that it'll need later* → memory. (A repeated correction can
+start as a `feedback` memory and graduate into `CLAUDE.md` once it's a hard rule.)
+
+---
+
+## 4. The file format
 
 Every memory is **one file = one fact**, with YAML frontmatter and a body.
 The `MEMORY.md` index holds **one line per memory** and no memory content — it's
@@ -132,11 +149,35 @@ dangling links in the curated project copy here; that's why.)
 
 ---
 
-## 4. How to add to / edit / promote them
+## 5. How to add to / edit / promote them
 
 You don't hand-edit these much — you tell Claude in plain language and it writes
 the file + updates the index. Below are **real prompts** from the
 angular-material-DS sessions that produced the files in this repo.
+
+### What to save — and what NOT to
+
+Save what's **non-obvious and reusable**: a gotcha that bit you, a confirmed
+decision, a preference, a where-things-live pointer.
+
+**Don't** save (it bloats the index and the index has a size limit that's loaded
+every session — over-stuffing it degrades every future session):
+
+- Code structure / file layout — Claude can read the repo.
+- Past bug fixes already in the diff or git history.
+- Anything already in `CLAUDE.md` or the project README.
+- Facts that only matter to the conversation you're in right now.
+
+If you're tempted to save one of those, ask instead: *what was non-obvious about
+it?* — and save that.
+
+### Project memory or global? (the decision)
+
+- **Project** — true only for *this* repo: its stack, its decisions, its quirks.
+- **Global** (`~/.claude/memory/`) — true across *all* your work: who you are,
+  how you like Claude to behave, tool/API gotchas that recur everywhere.
+
+When a project fact turns out to be universal, **promote** it (see below).
 
 ### Create a memory
 
@@ -203,7 +244,7 @@ file.
 
 ---
 
-## 5. Setting this up on your own machine
+## 6. Setting this up on your own machine
 
 1. Drop a `CLAUDE.md` at `~/.claude/CLAUDE.md` with your global working-style
    rules (see `global/CLAUDE.md` here for an example).
