@@ -168,6 +168,19 @@ every session — over-stuffing it degrades every future session):
 - Anything already in `CLAUDE.md` or the project README.
 - Facts that only matter to the conversation you're in right now.
 
+**For designers specifically:**
+
+- **Figma node IDs / file keys** — they're session-specific and go stale across
+  conversations. Save the *component name* or *where to find it*, not the ID.
+- **Token values / component specs / variant names** that already live in the
+  Figma file or DS docs — Claude can read the file. Save the *non-obvious why*
+  instead (e.g. "color paints render-lock the label → broke it last time").
+- **The raw Figma access token (or any secret)** — save the *fact that a token
+  exists and where* (`.env.local`), never the value. The `figma-access-token`
+  memory in this repo is the right pattern to copy.
+- **One-off visual choices** — "made this button blue here" isn't reusable.
+  "brand primary = #2574db, used at tone 40" is.
+
 If you're tempted to save one of those, ask instead: *what was non-obvious about
 it?* — and save that.
 
