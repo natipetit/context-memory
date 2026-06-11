@@ -1,5 +1,16 @@
 # Claude Code context & memory — a worked example
 
+> **Which Claude is this for?** This setup works best in **Claude Code**, where
+> the global layer (`~/.claude/CLAUDE.md`, `~/.claude/memory/`, `~/.claude/docs/`)
+> and per-project memory live as files on disk you can edit, version, and share.
+> You can still create **project-scoped memory** in **Claude.ai (chat) Projects**
+> and in **Cowork** — Cowork even stores it as a `memory.md` in the project folder
+> you can open and edit locally. What those don't give you is the cross-project
+> **global** memory layer in this file format: their memory and custom
+> instructions are scoped per-project and managed in-app, not as a global file
+> tree you manage on your machine. So the project-memory ideas below transfer;
+> the global-file management is Claude Code only.
+
 This repo is a **reference example** for how we use Claude Code's context files:
 global instructions, global memory, and per-project memory. It's a snapshot of a
 real setup (the `angular-material-DS` design-system project), copied here so the
@@ -209,3 +220,12 @@ file.
 > for secrets, internal URLs, or anything you don't want shared before publishing
 > a copy like this one. (The personal `RTK.md` tool config and ~20 deep project
 > files were intentionally left out of this example for that reason.)
+
+---
+
+## Read more
+
+- [How Claude remembers your project — Claude Code Docs](https://code.claude.com/docs/en/memory) — the file-based memory + `CLAUDE.md` vs `MEMORY.md` distinction
+- [Memory tool — Claude API Docs](https://platform.claude.com/docs/en/agents-and-tools/tool-use/memory-tool) — the underlying memory tool, if you're building with the API
+- [Get started with Claude Cowork — Help Center](https://support.claude.com/en/articles/13345190-get-started-with-claude-cowork) — Cowork Projects: per-project memory, instructions, scheduled tasks
+- [The three markdown files that run Claude Cowork](https://medium.com/@shard/the-three-markdown-files-that-run-claude-cowork-4e8d2af36ced) — how Cowork's `memory.md` works in the project folder
