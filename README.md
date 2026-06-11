@@ -17,6 +17,14 @@ real setup (the `angular-material-DS` design-system project), copied here so the
 team can see the shape of the files, where they live, and the prompts that
 created, edited, and promoted them.
 
+> **Why a designer would bother:** the payoff isn't note-taking — it's that memory
+> + a `DESIGN.md` let Claude **design within your system** instead of improvising
+> one-offs. Memory carries the recurring gotchas, brand constants, and confirmed
+> pattern decisions across sessions; `DESIGN.md` is the grammar (which surface /
+> component / composition for which task). Together they mean Claude reaches for
+> *your* button, *your* spacing, *your* bulk-action pattern — not a generic guess.
+> See `project-angular-material-ds/memory/design-md-goal.md` for that north star.
+
 > Usernames in paths below are written as `<you>`. On a real machine that's your
 > actual home folder (e.g. `/Users/jdoe/...`). Substitute your own throughout.
 
@@ -138,10 +146,10 @@ metadata:
 
 Four `type`s:
 
-- **user** — who you are (role, expertise, preferences). e.g. `user-figma-proficiency`
-- **feedback** — how you want Claude to work (corrections, confirmed approaches); include the *why*. e.g. `memory-save-discipline`, `per-component-standing-checks`
-- **project** — ongoing work/goals/constraints not derivable from the code or git. e.g. `pilot-to-demo-reframe`, `token-tier-darkmode-prereq`
-- **reference** — pointers to external resources (URLs, dashboards, tickets). e.g. `figma-access-token`
+- **user** — who you are (role, expertise, preferences). e.g. `user-figma-proficiency` ("user is fluent in Figma; skip UI walkthroughs")
+- **feedback** — how you want Claude to work (corrections, confirmed approaches); include the *why*. e.g. `per-component-standing-checks` (the a11y + interaction-state gate to run on every component), `verify-at-source-not-doc-trace` (check rules at the actual Figma file, not your own docs)
+- **project** — ongoing work/goals/constraints not derivable from the code or git. e.g. `pilot-to-demo-reframe`, `token-tier-darkmode-prereq` (token pipeline must be refactored before dark mode)
+- **reference** — pointers to external resources (URLs, dashboards, tickets). e.g. `figma-access-token` (where the token lives, not the value)
 
 `[[wikilinks]]` cross-reference other memories. A link to a file that doesn't
 exist yet is **valid** — it marks something worth writing later. (You'll see some
@@ -159,6 +167,17 @@ angular-material-DS sessions that produced the files in this repo.
 
 Save what's **non-obvious and reusable**: a gotcha that bit you, a confirmed
 decision, a preference, a where-things-live pointer.
+
+**Good things to save as a designer** (real examples from this repo):
+
+- A recurring Figma gotcha → `label-render-lock-root-cause.md` (color paints
+  render-lock the label; the plugin write is a no-op — fix manually).
+- A confirmed DS pattern decision → `bulk-action-canonical.md` (inline header
+  toolbar is canonical, *not* a floating bar) so Claude stops re-litigating it.
+- A working method → `fidelity-sweep-sop.md` (the repeatable per-component
+  check: Storybook ↔ Figma ↔ props), so the next sweep doesn't reinvent it.
+- Brand constants that aren't obvious from a glance — primary `#2574db` at tone
+  40, Open Sans 400/600/700 — so Claude reaches for them by default.
 
 **Don't** save (it bloats the index and the index has a size limit that's loaded
 every session — over-stuffing it degrades every future session):
@@ -269,6 +288,14 @@ file.
 4. Keep `DESIGN.md` / `PROGRESS.md` (or your project's equivalents) in the
    **project repo**, not in `~/.claude` — they're team artifacts, reviewed like
    code.
+
+> **Designers — the short version:** you mostly don't hand-create any of these.
+> Work in Figma with Claude as usual, and when something non-obvious comes up just
+> say *"save that to memory."* Claude writes the file and updates the index. The
+> global memory in `global/memory/` here is already Figma/DS-heavy (API limits,
+> Code Connect SOP, the always-screenshot-verify rule, token architecture) — copy
+> that folder into your own `~/.claude/memory/` as a starter kit and you inherit
+> the gotchas without re-learning them.
 
 > **Note:** memory files can contain whatever the session learned — double-check
 > for secrets, internal URLs, or anything you don't want shared before publishing
